@@ -1,0 +1,88 @@
+<h1 class="p-3" style="text-align: center;">Editar Canción</h1>
+
+
+<div fxLayout="row" fxLayoutGap="40px" fxLayout.xs="column" fxLayoutAlign="center center">
+    <div fxFlex="60" fxLayout="column">
+
+        <form (ngSubmit)="editarCancion(cancionForm.value)" autocomplete="off" [formGroup]="cancionForm">
+
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px">
+                <mat-form-field fxFlex="100" fxLayout.xs="column">
+                    <mat-label>Título</mat-label>
+                    <input matInput type="text" formControlName="titulo" placeholder="Titulo de la canción" placeholder id="input_titulo">
+                    <span class="form-text text-danger" *ngIf="cancionForm.get('titulo')?.hasError('required') && cancionForm.get('titulo')?.touched">
+                        Debe ingresar un título para la canción
+                    </span>
+                    <span class="form-text text-danger" *ngIf="cancionForm.get('titulo')?.hasError('maxlength')">
+                        El título no debe exceder los 128 carácteres
+                    </span>
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px">
+                <mat-form-field fxFlex="100" fxLayout.xs="column">
+                    <mat-label>Minutos(mm)</mat-label>
+                    <input matInput type="text" class="form-control" formControlName="minutos" placeholder="mm">
+
+                    <span class="form-text text-danger" *ngIf="(cancionForm.get('minutos')?.hasError('required') && cancionForm.get('minutos')?.touched)">
+                        Debe ingresar un tiempo de duración para la canción
+                    </span>
+                    <span class="form-text text-danger" *ngIf="cancionForm.get('minutos')?.hasError('maxlength')">
+                        Los minutos no deben exceder los 2 carácteres
+                    </span>
+                    <span class="form-text text-danger" *ngIf="cancionForm.get('minutos')?.hasError('pattern')">
+                        Solo debe ingresar números
+                    </span>
+                </mat-form-field>
+
+                <mat-form-field fxFlex="100" fxLayout.xs="column">
+                    <mat-label>Segundos(ss)</mat-label>
+                    <input matInput type="text" class="form-control" formControlName="segundos" placeholder="ss">
+
+                    <span class="form-text text-danger" *ngIf="(cancionForm.get('segundos')?.hasError('required') && cancionForm.get('segundos')?.touched)">
+                        Debe ingresar un tiempo de duración para la canción
+                    </span>
+                    <span class="form-text text-danger" *ngIf="cancionForm.get('segundos')?.hasError('maxlength')">
+                        Los segundos no deben exceder los 2 carácteres
+                    </span>
+                    <span class="form-text text-danger" *ngIf="cancionForm.get('segundos')?.hasError('pattern')">
+                        Solo debe ingresar números
+                    </span>
+                </mat-form-field>
+
+            </div>
+
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px">
+                <mat-form-field fxFlex="100" fxLayout.xs="column">
+                    <mat-label>Interprete</mat-label>
+                    <input matInput type="text" formControlName="interprete" placeholder="Interprete de la canción" placeholder id="input_interprete">
+                    <span class="form-text text-danger" *ngIf="cancionForm.get('interprete')?.hasError('required') && cancionForm.get('interprete')?.touched">
+                        Debe ingresar un interprete para la canción
+                      </span>
+                    <span class="form-text text-danger" *ngIf="cancionForm.get('interprete')?.hasError('maxlength')">
+                        El interprete no debe exceder los 128 carácteres
+                      </span>
+                </mat-form-field>
+            </div>
+
+
+            <br>
+
+            <div fxLayout class="button-row">
+                <button mat-raised-button color="primary" type="submit" [disabled]="!cancionForm.valid">
+                    <mat-icon>edit</mat-icon>
+                    Editar
+                </button>
+
+                <button mat-raised-button (click)="cancelCreate()">
+                    <mat-icon>cancel</mat-icon>
+                    Cancelar
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+
+
+</div>

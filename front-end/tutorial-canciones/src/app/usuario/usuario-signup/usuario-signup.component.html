@@ -1,0 +1,76 @@
+<div fxLayout="row" fxLayoutAlign="center center" fxLayoutAlign.sm="" fxLayoutAlign.xs="" style="padding-top:100px;">
+    <mat-card fxFlex="40%">
+        <mat-card-title>Registro</mat-card-title>
+
+        <mat-card-content fxLayout="column">
+            <form (ngSubmit)="registrarUsuario()" autocomplete="off" [formGroup]="usuarioForm">
+
+                <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px">
+                    <mat-form-field fxFlex="100" fxLayout.xs="column">
+                        <mat-label>Usuario</mat-label>
+                        <input matInput type="text" formControlName="nombre" placeholder="ejemplo@ejemplo.com" placeholder id="input_usuario">
+                        <span class="form-text text-danger" *ngIf="usuarioForm.get('nombre')?.hasError('required') && usuarioForm.get('nombre')?.touched">
+                    Debe ingresar un usuario para registrarse
+                </span>
+                        <span class="form-text text-danger" *ngIf="usuarioForm.get('nombre')?.hasError('maxlength')">
+                    El usuario no debe exceder los 50 carácteres
+                </span>
+                    </mat-form-field>
+
+                </div>
+
+                <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px">
+                    <mat-form-field fxFlex="100" fxLayout.xs="column">
+                        <mat-label>Contraseña</mat-label>
+                        <input matInput type="password" formControlName="password" placeholder="*********" placeholder id="input_contrasena">
+                        <span class="form-text text-danger" *ngIf="usuarioForm.get('password')?.hasError('required') && usuarioForm.get('password')?.touched">
+                    Debe ingresar una contraseña para registrarse
+                </span>
+                        <span class="form-text text-danger" *ngIf="usuarioForm.get('password')?.hasError('maxlength')">
+                    La contraseña no debe exceder los 50 carácteres
+                </span>
+                        <span class="form-text text-danger" *ngIf="usuarioForm.get('password')?.hasError('minlength')">
+                    La contraseña debe tener más de 4 carácteres
+                </span>
+                    </mat-form-field>
+
+                </div>
+
+                <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px">
+                    <mat-form-field fxFlex="100" fxLayout.xs="column">
+                        <mat-label>Confirmar contraseña</mat-label>
+                        <input matInput type="password" formControlName="confirmPassword" placeholder="*********" placeholder id="input_contrasena">
+                        <span class="form-text text-danger" *ngIf="usuarioForm.get('confirmPassword')?.hasError('required') && usuarioForm.get('confirmPassword')?.touched">
+                    Debe ingresar una contraseña para registrarse
+                  </span>
+                        <span class="form-text text-danger" *ngIf="usuarioForm.get('confirmPassword')?.hasError('maxlength')">
+                    La contraseña no debe exceder los 50 carácteres
+                  </span>
+                        <span class="form-text text-danger" *ngIf="usuarioForm.get('confirmPassword')?.hasError('minlength')">
+                    La contraseña debe tener más de 4 carácteres
+                  </span>
+                        <span class="form-text text-danger" *ngIf="usuarioForm.get('confirmPassword')?.value !== usuarioForm.get('password')?.value">
+                    Las contraseñas no coinciden
+                  </span>
+                    </mat-form-field>
+
+                </div>
+
+                <br>
+
+                <div fxLayout class="button-row">
+                    <button mat-raised-button color="primary" type="submit" [disabled]="!usuarioForm.valid || usuarioForm.get('confirmPassword')?.value !== usuarioForm.get('password')?.value">
+                        <mat-icon>account_circle</mat-icon>
+                        Registrarse
+                    </button>
+                </div>
+                <div class="col-12 text-center mt-2">
+                    <p>¿Ya tienes cuenta? <a href="/auth/signin">Inicia sesión</a></p>
+                </div>
+
+            </form>
+        </mat-card-content>
+
+
+    </mat-card>
+</div>

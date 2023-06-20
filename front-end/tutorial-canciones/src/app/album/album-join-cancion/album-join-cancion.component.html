@@ -1,0 +1,49 @@
+<h1 class="p-3" style="text-align: center;">Asociar Canción a Álbum</h1>
+
+
+<div fxLayout="row" fxLayoutGap="40px" fxLayout.xs="column" fxLayoutAlign="center center">
+    <div fxFlex="60" fxLayout="column">
+
+        <form (ngSubmit)="asociarCancion()" autocomplete="off" [formGroup]="albumCancionForm">
+
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px">
+                <mat-form-field fxFlex="100" fxLayout.xs="column">
+                    <mat-label>Título</mat-label>
+                    <input matInput type="text" formControlName="tituloAlbum" placeholder="Titulo del album" placeholder id="input_titulo" [readonly]="true">
+
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px">
+                <mat-form-field fxFlex="60" appearance="fill" id="select_medio">
+                    <mat-label>Canción</mat-label>
+                    <mat-select formControlName="idCancion">
+                        <mat-option value="" disabled>Seleccione la cancición que desea asociar</mat-option>
+                        <mat-option *ngFor="let cancion of canciones" value={{cancion.id}}>{{cancion.titulo}}</mat-option>
+                    </mat-select>
+                    <span class="form-text text-danger" *ngIf="albumCancionForm.get('tituloCancion')?.hasError('required') && albumCancionForm.get('tituloCancion')?.touched">
+                        Debe seleccionar una canción para asociarla al álbum
+                    </span>
+                </mat-form-field>
+            </div>
+
+            <br>
+
+            <div fxLayout class="button-row">
+                <button mat-raised-button color="primary" type="submit" [disabled]="!albumCancionForm.valid">
+                    <mat-icon>add</mat-icon>
+                    Asociar canción
+                </button>
+
+                <button mat-raised-button (click)="cancelarAsociacion()">
+                    <mat-icon>cancel</mat-icon>
+                    Cancelar
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+
+
+</div>

@@ -1,0 +1,90 @@
+<mat-grid-list cols="1" *ngIf="!cancion; else divCancion">
+    <mat-grid-tile>
+
+    </mat-grid-tile>
+</mat-grid-list>
+
+<ng-template #divCancion>
+
+    <div class="row">
+        <div class="col-12 text-center mb-2">
+            <label class="fs-4 fw-bold">Canción: {{cancion?.titulo}}</label>
+            <button *ngIf="cancion" type="button" class="btn btn-outline-success ms-3 me-2" (click)="goToEdit()" title="Editar canción"><i class="bi bi-pencil-square"></i></button>
+            <button *ngIf="cancion" type="button" class="btn btn-outline-danger me-1" (click)="eliminarCancion()" title="Eliminar canción"><i class="bi bi-trash-fill"></i></button>
+            <button *ngIf="cancion.propia === 'True'" type="button" class="btn btn-outline-info me-2" (click)="openDialog(cancion)" title="Compartir canción"><i class="bi bi-share"></i></button>
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-6">
+            <mat-card>
+                <mat-card-content>
+                    <p><span class="fw-bold">Duración: </span> <span class="text-capitalize">{{cancion?.minutos | duracion}}:{{cancion?.segundos | duracion }}</span></p>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="col-6">
+            <mat-card>
+                <mat-card-content>
+                    <p class="my-0"><span class="fw-bold">Intérpretes: </span> <span class="text-capitalize">{{cancion?.interprete}}</span></p>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-12 mt-3 mb-2 ms-2">
+            <h2>Álbumes</h2>
+        </div>
+        <div class="col-12">
+
+            <table mat-table [dataSource]="cancion.albumes" class="mat-elevation-z8" summary="Lista de álbumes">
+
+              <!-- Name Column -->
+                <ng-container matColumnDef="titulo">
+                    <th mat-header-cell *matHeaderCellDef scope="col"> Título </th>
+                    <td mat-cell *matCellDef="let element" scope="row"> {{element.titulo}} </td>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="anio">
+                    <th mat-header-cell *matHeaderCellDef scope="col"> Año </th>
+                    <td mat-cell *matCellDef="let element" scope="row"> {{element.anio}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="medio">
+                    <th mat-header-cell *matHeaderCellDef scope="col"> Medio </th>
+                    <td mat-cell *matCellDef="let element" scope="row"> {{element.medio?.llave}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;; let i = index"></tr>
+            </table>
+
+        </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-12 mt-3 mb-2 ms-2">
+          <h2>Compartido con</h2>
+      </div>
+
+      <div class="col-12">
+          <table mat-table [dataSource]="mostrarCompartidosCancion" class="mat-elevation-z8" summary="Lista de usuarios" aria-describedby="colecName">
+a
+              <!-- Name Column -->
+              <ng-container matColumnDef="nombre">
+                  <th mat-header-cell *matHeaderCellDef scope="col"> Usuario </th>
+                  <td mat-cell *matCellDef="let element" scope="row"> {{ element.nombre }} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumnsCompartidos"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumnsCompartidos;; let i = index"></tr>
+
+          </table>
+      </div>
+  </div>
+
+</ng-template>

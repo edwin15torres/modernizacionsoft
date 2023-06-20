@@ -1,0 +1,76 @@
+<mat-sidenav-container fullscreen>
+
+    <mat-sidenav #sidenav>
+
+        <mat-toolbar color="primary">
+            <span>Menú</span>
+            <span class="spacer"></span>
+            <button mat-icon-button (click)="sidenav.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
+
+        </mat-toolbar>
+
+        <mat-nav-list title="menu">
+            <a [routerLink]="['/ionic/albumes/', session.id, session.token ]" mat-list-item (click)="sidenav.toggle()" id="btn_albumes">
+                <mat-icon mat-list-icon>label</mat-icon>
+                <span>Albumes</span>
+            </a>
+            <a [routerLink]="['/ionic/canciones/', session.id, session.token ]" mat-list-item (click)="sidenav.toggle()" id="btn_canciones">
+                <mat-icon mat-list-icon>label</mat-icon>
+                <span>Canciones</span>
+            </a>
+        </mat-nav-list>
+
+    </mat-sidenav>
+
+    <mat-toolbar>
+        <button mat-icon-button (click)="sidenav.toggle()" aria-label="menu" id="btn_menu" *ngIf="session.nombre">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <div style="position: relative; width: 100%; height: 100%;">
+            <img src="/assets/images/logo-Ionic-blanco2.png" alt="image" width="80" height="50">
+        </div>
+
+
+
+        <span class="spacer"></span>
+
+        <div fxShow="true" fxHide.lt-sm="true">
+
+            <!-- The following menu items will be hidden on both SM and XS screen sizes -->
+            <span *ngIf="session.nombre" style="font-size: 14px;">{{session.nombre}}&nbsp; &nbsp; &nbsp;</span>
+            <button id="btn_signup" routerLink="/" routerLinkActive="is-active" mat-button>
+                <mat-icon>home</mat-icon>
+                Sobre nosotros
+            </button>
+            <button *ngIf="!session.nombre" id="btn_signup" routerLink="/auth/signup" routerLinkActive="is-active" mat-button>
+                <mat-icon>app_registration</mat-icon>
+                Registrarse
+            </button>
+            <button *ngIf="!session.nombre" id="btn_signin" routerLink="/auth/" routerLinkActive="is-active" mat-button>
+                <mat-icon>login</mat-icon>
+                Ingresar
+            </button>
+            <a *ngIf="session.nombre">
+                <img src="/assets/images/notifications_active.png" alt="image">
+            </a>
+            <button *ngIf="session.nombre" id="btn_salir" mat-button (click)="cerrarSession()">
+                <mat-icon>logout</mat-icon>
+                Salir
+            </button>
+
+
+        </div>
+
+
+    </mat-toolbar>
+
+
+    <div class="container" style="padding-bottom:100px;">
+        <router-outlet cdkScrollable></router-outlet>
+    </div>
+
+    <app-footer></app-footer>
+
+</mat-sidenav-container>

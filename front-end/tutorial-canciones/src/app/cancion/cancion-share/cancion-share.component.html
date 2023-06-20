@@ -1,0 +1,11 @@
+<div mat-dialog-content>
+  <p>¿A quién le quieres compartir esta canción ?</p>
+  <mat-form-field appearance="fill">
+    <mat-label>Escribe los nombres separados por comas</mat-label>
+    <input matInput required [(ngModel)]="data.users_names">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button [mat-dialog-close]="data.users_names" cdkFocusInitial (click)="shareCancion()">Compartir</button>
+</div>

@@ -5,7 +5,7 @@ def create_app(config_name):
     app = Flask(__name__)
 
     parent_dir = Path(__file__).parent.parent
-    db_path = parent_dir / 'persistencia' / 'ionic_database_completo.db'
+    db_path = parent_dir / 'persistencia' / 'ionic_database.db'
 
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

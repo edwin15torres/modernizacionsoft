@@ -1,46 +1,14 @@
 from flask import request
 from sqlalchemy.orm import query
-from flaskr.modelos.modelos import db, Cancion, CancionSchema, Usuario, UsuarioSchema, Album, AlbumSchema, RecursoCompartido, RecursoCompartidoSchema
+from microservicio2_albums.modelo.modelo import db, Usuario, Album, AlbumSchema, RecursoCompartido, RecursoCompartidoSchema
 from flask_restful import Resource
 from sqlalchemy.exc import IntegrityError
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
 
-cancion_schema = CancionSchema()
-usuario_schema = UsuarioSchema()
 album_schema = AlbumSchema()
 recurso_compartido_schema = RecursoCompartidoSchema()
 
-class VistaSignIn(Resource):
-
-    def post(self):
-        nuevo_usuario = Usuario(nombre=request.json["nombre"], contrasena=request.json["contrasena"])
-        db.session.add(nuevo_usuario)
-        db.session.commit()
-        token_de_acceso = create_access_token(identity = nuevo_usuario.id)
-        return {"mensaje":"usuario creado exitosamente", "token":token_de_acceso}
-# CÓDIGO MUERTO
-
-class VistaUsuarios(Resource):
-    def get(self):
-        return [usuario_schema.dump(u) for u in Usuario.query.all()]
-
-class VistaUsuario(Resource):
-    def get(self, id_usuario):
-        return usuario_schema.dump(Usuario.query.get_or_404(id_usuario))
-
-class VistaLogIn(Resource):
-
-    def post(self):
-        usuario = Usuario.query.filter(Usuario.nombre == request.json["nombre"], Usuario.contrasena == request.json["contrasena"]).first()
-        db.session.commit()
-        if usuario is None:
-            return "El usuario no existe.", 400
-        else:
-            token_de_acceso = create_access_token(identity = usuario.id)
-            return {"mensaje":"Inicio de sesión exitoso", "token": token_de_acceso}
-
 class VistaAlbumesUsuario(Resource):
-    # @jwt_required()
     def get(self, id_usuario):
         usuario = Usuario.query.get_or_404(id_usuario)
         propios = []
@@ -55,7 +23,6 @@ class VistaAlbumesUsuario(Resource):
 
         return [album_schema.dump(al) for al in propios]
 
-    # @jwt_required()
     def post(self, id_usuario):
         nuevo_album = Album(titulo=request.json["titulo"], anio=request.json["anio"], descripcion=request.json["descripcion"], medio=request.json["medio"], propio=1)
         usuario = Usuario.query.get_or_404(id_usuario)
@@ -68,38 +35,6 @@ class VistaAlbumesUsuario(Resource):
             return 'El usuario ya tiene un album con dicho nombre',409
 
         return album_schema.dump(nuevo_album)
-
-class VistaCancionesUsuario(Resource):
-    # @jwt_required()
-    def get(self, id_usuario):
-        usuario = Usuario.query.get_or_404(id_usuario)
-        propios = []
-
-        for c in usuario.canciones:
-            propios.append(c)
-
-        # compartidos = []
-        for c in usuario.compartidos:
-            if c.cancion_id != None :
-                cc = Cancion.query.filter(Cancion.id == c.cancion_id).first()
-                cc.propia = 'False'
-                propios.append(cc)
-
-        return [cancion_schema.dump(ca) for ca in propios]
-
-    # @jwt_required()
-    def post(self, id_usuario):
-        nueva_cancion = Cancion(titulo=request.json["titulo"], minutos=request.json["minutos"], segundos=request.json["segundos"], interprete=request.json["interprete"])
-        usuario = Usuario.query.get_or_404(id_usuario)
-        usuario.canciones.append(nueva_cancion)
-
-        try:
-            db.session.commit()
-        except IntegrityError:
-            db.session.rollback()
-            return 'El usuario ya tiene una cancion con dicho nombre',409
-
-        return cancion_schema.dump(nueva_cancion)
 
 class VistaAlbumes(Resource):
 
@@ -123,26 +58,6 @@ class VistaAlbum(Resource):
     def delete(self, id_album):
         album = Album.query.get_or_404(id_album)
         db.session.delete(album)
-        db.session.commit()
-        return '',204
-
-class VistaCancion(Resource):
-
-    def get(self, id_cancion):
-        return cancion_schema.dump(Cancion.query.get_or_404(id_cancion))
-
-    def put(self, id_cancion):
-        cancion = Cancion.query.get_or_404(id_cancion)
-        cancion.titulo = request.json.get("titulo",cancion.titulo)
-        cancion.minutos = request.json.get("minutos",cancion.minutos)
-        cancion.segundos = request.json.get("segundos",cancion.segundos)
-        cancion.interprete = request.json.get("interprete",cancion.interprete)
-        db.session.commit()
-        return cancion_schema.dump(cancion)
-
-    def delete(self, id_cancion):
-        cancion = Cancion.query.get_or_404(id_cancion)
-        db.session.delete(cancion)
         db.session.commit()
         return '',204
 
@@ -170,21 +85,11 @@ class VistaCancionesAlbum(Resource):
         db.session.commit()
         return cancion_schema.dump(nueva_cancion)
 
-class VistaAlbumesCanciones(Resource):
-    def get(self, id_cancion):
-        cancion = Cancion.query.get_or_404(id_cancion)
-        return [album_schema.dump(al) for al in cancion.albumes]
-
-# 
-
-
-
 class VistaRecursosCompartidos(Resource):
 
     def get(self):
         return [recurso_compartido_schema.dump(rc) for rc in RecursoCompartido.query.all()]
 
-    # @jwt_required()
     def post(self):
 
         usuario_destino = request.json["usuario_destino"]
@@ -248,7 +153,6 @@ class VistaRecursosCompartidos(Resource):
         db.session.commit()
         return recurso_compartido_schema.dump(recurso_compartido)
 
-
 class VistaRecursoCompartido(Resource):
 
     def get(self, id_recurso_compartido):
@@ -259,6 +163,7 @@ class VistaRecursoCompartido(Resource):
         db.session.delete(recurso_compartido)
         db.session.commit()
         return '',204
+
 class VistaAlbumUsuariosCompartidos(Resource):
 
     def get(self, id_album):
@@ -269,12 +174,3 @@ class VistaAlbumUsuariosCompartidos(Resource):
             usuarios.append(u)
         return [usuario_schema.dump(u) for u in usuarios]
 
-class VistaCancionUsuariosCompartidos(Resource):
-
-    def get(self, id_cancion):
-        recurso_compartido = RecursoCompartido.query.filter(RecursoCompartido.cancion_id == id_cancion).group_by(RecursoCompartido.usuario_destino_id).all()
-        usuarios = []
-        for rc in recurso_compartido:
-            u = Usuario.query.filter(Usuario.id == rc.usuario_destino_id).first()
-            usuarios.append(u)
-        return [usuario_schema.dump(u) for u in usuarios]

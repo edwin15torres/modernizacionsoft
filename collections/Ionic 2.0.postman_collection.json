@@ -1,0 +1,479 @@
+{
+	"info": {
+		"_postman_id": "2b961cba-2d21-4c82-a8d9-4d10398f3710",
+		"name": "Ionic 2.0",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "23053645"
+	},
+	"item": [
+		{
+			"name": "Microservicio1",
+			"item": [
+				{
+					"name": "Signin/Login",
+					"item": [
+						{
+							"name": "VistaSignIn",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"nombre\" : \"Pablo\",\r\n\"contrasena\" :\"jaja123\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{host}}/signin"
+							},
+							"response": []
+						},
+						{
+							"name": "VistaUsuarios",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{host}}/usuarios"
+							},
+							"response": []
+						},
+						{
+							"name": "VistaUsuario",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{host}}/usuario/1"
+							},
+							"response": []
+						},
+						{
+							"name": "VistaLogIn",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"nombre\" : \"Luisa\",\r\n\"contrasena\" :\"jaja123\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{host}}/logIn"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Microservicio2",
+			"item": [
+				{
+					"name": "Usuario ----> Album",
+					"item": [
+						{
+							"name": "VistaAlbumesUsuario",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"nombreProducto\" : \"Molino\",\r\n\"descripcion\" : \"Producto estandar\",\r\n\"precioMinimo\" : 100,\r\n\"noUnidades\" : 2,\r\n\"tipoNegocio\" : \"MAQUINARIA\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:5001/usuario/1/albumes"
+							},
+							"response": []
+						},
+						{
+							"name": "VistaAlbumesUsuario",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"titulo\" : \"Romulo gallegopa\",\r\n\"anio\" : 2006,\r\n\"descripcion\" : \"pop\",\r\n\"medio\" : \"DISCO\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:5001/usuario/1/albumes"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Album",
+					"item": [
+						{
+							"name": "VistaAlbumes",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:5001/albumes"
+							},
+							"response": []
+						},
+						{
+							"name": "VistaAlbum",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:5001/album/1"
+							},
+							"response": []
+						},
+						{
+							"name": "VistaAlbum",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"titulo\" : \"rio de pablo\",\r\n\"anio\" : 2016,\r\n\"descripcion\" : \"rock\",\r\n\"medio\" : \"DISCO\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:5001/album/1"
+							},
+							"response": []
+						},
+						{
+							"name": "VistaAlbum",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"titulo\" : \"Molinos de agua dulce\",\r\n\"anio\" : 2006,\r\n\"descripcion\" : \"segundo lanzamiento pop\",\r\n\"medio\" : \"DISCO\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:5001/album/1"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Recurso/compartido",
+					"item": [
+						{
+							"name": "VistaRecursosCompartidos",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:5001/recurso/compartido"
+							},
+							"response": []
+						},
+						{
+							"name": "VistaRecursosCompartidos",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"usuario_destino\" : \"Pablo\",\r\n\"usuario_origen_id\" : 2,\r\n\"tipo_recurso\" : \"CANCION\",\r\n\"id_recurso\" : 3}  ",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:5001/recurso/compartido"
+							},
+							"response": []
+						},
+						{
+							"name": "VistaRecursoCompartido",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:5001/recurso/compartido/1"
+							},
+							"response": []
+						},
+						{
+							"name": "VistaRecursoCompartido",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": "http://localhost:5001/recurso/compartido/1"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "recurso/compartido/<int:id_album>/usuario",
+					"item": [
+						{
+							"name": "VistaAlbumUsuariosCompartidos",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:5001/recurso/compartido/3/usuario"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Microservicio3",
+			"item": [
+				{
+					"name": "Usuario ----> Cancion",
+					"item": [
+						{
+							"name": "VistaCancionesUsuario",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:5002/usuario/2/canciones"
+							},
+							"response": []
+						},
+						{
+							"name": "VistaCancionesUsuario",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"titulo\" : \"luisa cancion\",\r\n\"minutos\" : 3,\r\n\"segundos\" : 10,\r\n\"interprete\" : \"Pornomotora\"}  ",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:5002/usuario/2/canciones"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Album ----> Cancion",
+					"item": [
+						{
+							"name": "VistaCancionesAlbum",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": "http://localhost:5002/album/1/canciones"
+							},
+							"response": []
+						},
+						{
+							"name": "VistaCancionesAlbum",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"titulo\" : \"ingrata 2 \",\r\n\"minutos\" : 2,\r\n\"segundos\" : 15,\r\n\"interprete\" : \"Cafe Tauba\"}  ",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:5002/album/2/canciones"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Cancion",
+					"item": [
+						{
+							"name": "VistaCancion",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": "http://localhost:5002/cancion/1"
+							},
+							"response": []
+						},
+						{
+							"name": "VistaCancion",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"titulo\" : \"rio cancion de luisa\",\r\n\"minutos\" : 3,\r\n\"segundos\" : 10,\r\n\"interprete\" : \"caifanes\"}  ",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:5002/cancion/1"
+							},
+							"response": []
+						},
+						{
+							"name": "VistaCancion",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"titulo\" : \"rio\",\r\n\"minutos\" : 3,\r\n\"segundos\" : 10,\r\n\"interprete\" : \"caifanes\"}  ",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:5002/cancion/2"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Cancion ----> Album",
+					"item": [
+						{
+							"name": "VistaAlbumesCanciones",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:5002/cancion/1/albumes"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "/recurso/cancion/<int:id_cancion>/usuario",
+					"item": [
+						{
+							"name": "VistaCancionUsuariosCompartidos",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{host}}/recurso/cancion/1/usuario"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

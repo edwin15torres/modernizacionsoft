@@ -11,7 +11,9 @@ import { environment } from 'src/environments/environment.prod';
 })
 export class CancionService {
 
-  private backUrl: string = environment.baseUrl
+  private baseUrlUsuario: string = environment.baseUrlUsuario
+  private baseUrlCancion: string = environment.baseUrlCancion
+  private baseUrlAlbum: string = environment.baseUrlAlbum
 
   constructor(private http: HttpClient) { }
 
@@ -19,7 +21,7 @@ export class CancionService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     })
-    return this.http.get<Cancion[]>(`${this.backUrl}/album/${idAlbum}/canciones`, {headers: headers})
+    return this.http.get<Cancion[]>(`${this.baseUrlCancion}/album/${idAlbum}/canciones`, {headers: headers})
   }
 
   getCanciones(usuarioCancion: number, token: string): Observable<Cancion[]>{
@@ -27,11 +29,11 @@ export class CancionService {
       'Authorization': `Bearer ${token}`
     })
 
-    return this.http.get<Cancion[]>(`${this.backUrl}/usuario/${usuarioCancion}/canciones`, {headers: headers})
+    return this.http.get<Cancion[]>(`${this.baseUrlCancion}/usuario/${usuarioCancion}/canciones`, {headers: headers})
   }
 
   getAlbumesCancion(cancionId: number): Observable<Album[]>{
-    return this.http.get<Album[]>(`${this.backUrl}/cancion/${cancionId}/albumes`)
+    return this.http.get<Album[]>(`${this.baseUrlCancion}/cancion/${cancionId}/albumes`)
   }
 
   crearCancion(idUsuario: number, token: string, cancion: Cancion):Observable<Cancion>{
@@ -39,26 +41,26 @@ export class CancionService {
       'Authorization': `Bearer ${token}`
     })
 
-    return this.http.post<Cancion>(`${this.backUrl}/usuario/${idUsuario}/canciones`, cancion, {headers: headers})
+    return this.http.post<Cancion>(`${this.baseUrlCancion}/usuario/${idUsuario}/canciones`, cancion, {headers: headers})
   }
 
   getCancion(cancionId: number): Observable<Cancion>{
-    return this.http.get<Cancion>(`${this.backUrl}/cancion/${cancionId}`)
+    return this.http.get<Cancion>(`${this.baseUrlCancion}/cancion/${cancionId}`)
   }
 
   editarCancion(cancion: Cancion, cancionId: number):Observable<Cancion>{
-    return this.http.put<Cancion>(`${this.backUrl}/cancion/${cancionId}`, cancion)
+    return this.http.put<Cancion>(`${this.baseUrlCancion}/cancion/${cancionId}`, cancion)
   }
 
   eliminarCancion(cancionId: number): Observable<Cancion>{
-    return this.http.delete<Cancion>(`${this.backUrl}/cancion/${cancionId}`)
+    return this.http.delete<Cancion>(`${this.baseUrlCancion}/cancion/${cancionId}`)
   }
 
   compartirCancion(idCancion: number, idUsuarioD: string, idUsuario: number, token: string):Observable<Cancion>{
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     })
-    return this.http.post<Cancion>(`${this.backUrl}/recurso/compartido`,
+    return this.http.post<Cancion>(`${this.baseUrlCancion}/recurso/compartido`,
       {
         "usuario_origen_id": idUsuario,
         "usuario_destino": idUsuarioD,
@@ -69,7 +71,7 @@ export class CancionService {
   }
 
   getUsuariosCompartidos(idCancion: number): Observable<any[]>{
-    return this.http.get<any[]>(`${this.backUrl}/recurso/cancion/${idCancion}/usuario`)
+    return this.http.get<any[]>(`${this.baseUrlUsuario}/recurso/cancion/${idCancion}/usuario`)
   }
 
 }

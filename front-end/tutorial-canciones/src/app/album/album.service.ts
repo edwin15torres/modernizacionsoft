@@ -11,7 +11,9 @@ import { environment } from 'src/environments/environment.prod';
 })
 export class AlbumService {
 
-  private backUrl: string = environment.baseUrl
+  private baseUrlUsuario: string = environment.baseUrlUsuario
+  private baseUrlCancion: string = environment.baseUrlCancion
+  private baseUrlAlbum: string = environment.baseUrlAlbum
 
   constructor(private http: HttpClient) { }
 
@@ -19,43 +21,43 @@ export class AlbumService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     })
-    return this.http.get<Album[]>(`${this.backUrl}/usuario/${usuario}/albumes`, {headers: headers})
+    return this.http.get<Album[]>(`${this.baseUrlAlbum}/usuario/${usuario}/albumes`, {headers: headers})
   }
 
   getCancionesAlbum(idAlbum: number, token: string): Observable<Cancion[]>{
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     })
-    return this.http.get<Cancion[]>(`${this.backUrl}/album/${idAlbum}/canciones`, {headers: headers})
+    return this.http.get<Cancion[]>(`${this.baseUrlCancion}/album/${idAlbum}/canciones`, {headers: headers})
   }
 
   crearAlbum(idUsuario: number, token: string, album: Album):Observable<Album>{
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     })
-    return this.http.post<Album>(`${this.backUrl}/usuario/${idUsuario}/albumes`, album, {headers: headers})
+    return this.http.post<Album>(`${this.baseUrlAlbum}/usuario/${idUsuario}/albumes`, album, {headers: headers})
   }
 
   getAlbum(albumId: number): Observable<Album>{
-    return this.http.get<Album>(`${this.backUrl}/album/${albumId}`)
+    return this.http.get<Album>(`${this.baseUrlAlbum}/album/${albumId}`)
   }
 
   editarAlbum(idUsuario: number, token: string, albumId: number, album: Album): Observable<Album>{
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     })
-    return this.http.put<Album>(`${this.backUrl}/album/${albumId}`, album, {headers: headers})
+    return this.http.put<Album>(`${this.baseUrlAlbum}/album/${albumId}`, album, {headers: headers})
   }
 
   eliminarAlbum(idUsuario: number, token: string, albumId: number): Observable<Album>{
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     })
-    return this.http.delete<Album>(`${this.backUrl}/album/${albumId}`, {headers: headers})
+    return this.http.delete<Album>(`${this.baseUrlAlbum}/album/${albumId}`, {headers: headers})
   }
 
   asociarCancion(albumId: number, cancionId: number): Observable<Cancion>{
-    return this.http.post<Cancion>(`${this.backUrl}/album/${albumId}/canciones`,
+    return this.http.post<Cancion>(`${this.baseUrlCancion}/album/${albumId}/canciones`,
         {"id_cancion": cancionId}
       )
   }
@@ -64,7 +66,7 @@ export class AlbumService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     })
-    return this.http.post<Album>(`${this.backUrl}/recurso/compartido`,
+    return this.http.post<Album>(`${this.baseUrlAlbum}/recurso/compartido`,
       {
         "usuario_origen_id": idUsuario,
         "usuario_destino": idUsuarioD,
@@ -75,7 +77,7 @@ export class AlbumService {
   }
 
   getUsuariosCompartidos(idAlbum: number): Observable<Usuario[]>{
-    return this.http.get<Usuario[]>(`${this.backUrl}/recurso/compartido/${idAlbum}/usuario`)
+    return this.http.get<Usuario[]>(`${this.baseUrlAlbum}/recurso/compartido/${idAlbum}/usuario`)
   }
 
 }

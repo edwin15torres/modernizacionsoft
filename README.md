@@ -22,5 +22,10 @@
         ***py -m venv venv***
 2. Activar maquina virtual:
         ***source venv/Scripts/activate***
-3. Ejecutar en flaskr/ :
-        ***flask run***
+3. Ejecutar en microservicio1_users/ :
+        ***flask run - p 5000***
+4. Ejecutar en microservicio3_songs/ :
+        ***flask run - p 5001***
+5. Ejecutar en microservicio2_albums/ :
+        ***flask run - p 5002***
+

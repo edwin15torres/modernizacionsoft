@@ -15,7 +15,9 @@ export class UsuarioService {
 
     helper = new JwtHelperService();
 
-    private backUrl: string = environment.baseUrl
+    private baseUrlUsuario: string = environment.baseUrlUsuario
+    private baseUrlCancion: string = environment.baseUrlCancion
+    private baseUrlAlbum: string = environment.baseUrlAlbum
     private _session: UsuarioSesion|undefined;
 
     constructor(private http: HttpClient) { }
@@ -30,7 +32,7 @@ export class UsuarioService {
     }
 
     userLogIn(nombre: string, contrasena: string):Observable<any>{
-        return this.http.post<any>(`${this.backUrl}/logIn`, {"nombre": nombre, "contrasena": contrasena })
+        return this.http.post<any>(`${this.baseUrlUsuario}/logIn`, {"nombre": nombre, "contrasena": contrasena })
         .pipe(
             tap( resp => {
                 const decodedToken = this.helper.decodeToken(resp.token);
@@ -43,6 +45,6 @@ export class UsuarioService {
     }
 
     userSignUp(nombre: string, contrasena: string): Observable<any>{
-        return this.http.post<any>(`${this.backUrl}/signin`, {"nombre": nombre, "contrasena": contrasena})
+        return this.http.post<any>(`${this.baseUrlUsuario}/signin`, {"nombre": nombre, "contrasena": contrasena})
     }
 }

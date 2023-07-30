@@ -123,7 +123,7 @@
 										}
 									}
 								},
-								"url": "http://localhost:5001/usuario/1/albumes"
+								"url": "{{host_album}}/usuario/1/albumes"
 							},
 							"response": []
 						},
@@ -147,7 +147,7 @@
 										}
 									}
 								},
-								"url": "http://localhost:5001/usuario/1/albumes"
+								"url": "{{host_album}}/usuario/1/albumes"
 							},
 							"response": []
 						}
@@ -161,7 +161,7 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "http://localhost:5001/albumes"
+								"url": "{{host_album}}/albumes"
 							},
 							"response": []
 						},
@@ -182,7 +182,7 @@
 										}
 									}
 								},
-								"url": "http://localhost:5001/album/1"
+								"url": "{{host_album}}/album/1"
 							},
 							"response": []
 						},
@@ -200,7 +200,7 @@
 										}
 									}
 								},
-								"url": "http://localhost:5001/album/1"
+								"url": "{{host_album}}/album/1"
 							},
 							"response": []
 						},
@@ -218,7 +218,7 @@
 										}
 									}
 								},
-								"url": "http://localhost:5001/album/1"
+								"url": "{{host_album}}/album/1"
 							},
 							"response": []
 						}
@@ -232,7 +232,7 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "http://localhost:5001/recurso/compartido"
+								"url": "{{host_album}}/recurso/compartido"
 							},
 							"response": []
 						},
@@ -243,14 +243,14 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\"usuario_destino\" : \"Pablo\",\r\n\"usuario_origen_id\" : 2,\r\n\"tipo_recurso\" : \"CANCION\",\r\n\"id_recurso\" : 3}  ",
+									"raw": "{\"usuario_destino\" : \"admin\",\r\n\"usuario_origen_id\" : 2,\r\n\"tipo_recurso\" : \"CANCION\",\r\n\"id_recurso\" : 3}  ",
 									"options": {
 										"raw": {
 											"language": "json"
 										}
 									}
 								},
-								"url": "http://localhost:5001/recurso/compartido"
+								"url": "{{host_album}}/recurso/compartido"
 							},
 							"response": []
 						},
@@ -259,7 +259,7 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "http://localhost:5001/recurso/compartido/1"
+								"url": "{{host_album}}/recurso/compartido/1"
 							},
 							"response": []
 						},
@@ -268,7 +268,7 @@
 							"request": {
 								"method": "DELETE",
 								"header": [],
-								"url": "http://localhost:5001/recurso/compartido/1"
+								"url": "{{host_album}}/recurso/compartido/1"
 							},
 							"response": []
 						}
@@ -282,7 +282,7 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "http://localhost:5001/recurso/compartido/3/usuario"
+								"url": "{{host_album}}/recurso/compartido/2/usuario"
 							},
 							"response": []
 						}
@@ -319,7 +319,7 @@
 										}
 									}
 								},
-								"url": "http://localhost:5002/usuario/2/canciones"
+								"url": "{{host_cancion}}/usuario/2/canciones"
 							},
 							"response": []
 						},
@@ -343,7 +343,7 @@
 										}
 									}
 								},
-								"url": "http://localhost:5002/usuario/2/canciones"
+								"url": "{{host_cancion}}/usuario/2/canciones"
 							},
 							"response": []
 						}
@@ -364,7 +364,7 @@
 									"mode": "raw",
 									"raw": ""
 								},
-								"url": "http://localhost:5002/album/1/canciones"
+								"url": "{{host_cancion}}/album/1/canciones"
 							},
 							"response": []
 						},
@@ -382,7 +382,7 @@
 										}
 									}
 								},
-								"url": "http://localhost:5002/album/2/canciones"
+								"url": "{{host_cancion}}/album/1/canciones"
 							},
 							"response": []
 						}
@@ -403,7 +403,7 @@
 									"mode": "raw",
 									"raw": ""
 								},
-								"url": "http://localhost:5002/cancion/1"
+								"url": "{{host_cancion}}/cancion/1"
 							},
 							"response": []
 						},
@@ -421,7 +421,7 @@
 										}
 									}
 								},
-								"url": "http://localhost:5002/cancion/1"
+								"url": "{{host_cancion}}/cancion/1"
 							},
 							"response": []
 						},
@@ -439,7 +439,7 @@
 										}
 									}
 								},
-								"url": "http://localhost:5002/cancion/2"
+								"url": "{{host_cancion}}/cancion/2"
 							},
 							"response": []
 						}
@@ -453,7 +453,7 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "http://localhost:5002/cancion/1/albumes"
+								"url": "{{host_cancion}}/cancion/1/albumes"
 							},
 							"response": []
 						}
@@ -467,7 +467,7 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "{{host}}/recurso/cancion/1/usuario"
+								"url": "{{host_cancion}}/recurso/cancion/1/usuario"
 							},
 							"response": []
 						}

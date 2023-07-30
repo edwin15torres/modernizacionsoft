@@ -1,7 +1,7 @@
 from flask import request
 from sqlalchemy.orm import query
 from microservicio3_songs.modelo.modelo import db, Usuario, Cancion, CancionSchema, Album
-from microservicio2_albums.modelo.modelo import AlbumSchema
+from microservicio3_songs.modelo.modelo import AlbumSchema
 from flask_restful import Resource
 from sqlalchemy.exc import IntegrityError
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity

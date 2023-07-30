@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  microservicio1_users:
+    build: ./microservicio1_users
+    ports:
+      - "5000:5000"
+    networks:
+      - microservicios_net
+    volumes:
+      - ionic_database:/persistencia
+
+  microservicio2_albums:
+    build: ./microservicio2_albums
+    ports:
+      - "5002:5002"
+    networks:
+      - microservicios_net
+    volumes:
+      - ionic_database:/persistencia
+
+  microservicio3_songs:
+    build: ./microservicio3_songs
+    ports:
+      - "5001:5001"
+    networks:
+      - microservicios_net
+    volumes:
+      - ionic_database:/persistencia
+
+networks:
+  microservicios_net:
+    driver: bridge
+
+volumes:
+  ionic_database:

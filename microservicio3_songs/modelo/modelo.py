@@ -73,4 +73,11 @@ class CancionSchema(SQLAlchemyAutoSchema):
          model = Cancion
          include_relationships = True
          load_instance = True
+         
+class AlbumSchema(SQLAlchemyAutoSchema):
+    medio = EnumADiccionario(attribute=("medio"))
+    class Meta:
+         model = Album
+         include_relationships = True
+         load_instance = True
 

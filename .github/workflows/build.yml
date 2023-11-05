@@ -28,10 +28,6 @@ jobs:
         run: |
           yarn
           npm run test -- --code-coverage
-      - name: Publicar informes de cobertura en GitHub Pages
-        run: |
-          npm install -g angular-cli-ghpages
-          ngh
       - name: pruebas+coverage
         id: pruebas
         run: yarn jest --coverage

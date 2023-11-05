@@ -32,7 +32,6 @@ jobs:
         run: |
           npm install -g angular-cli-ghpages
           ngh
-        if: always()
       - name: pruebas+coverage
         id: pruebas
         run: yarn jest --coverage

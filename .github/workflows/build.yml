@@ -26,7 +26,7 @@ jobs:
         run: node -v
       - name: Instalación de librerías y dependencias
         run: |
-          npm ci
+          yarn
           npm run test -- --code-coverage
       - name: Publicar informes de cobertura en GitHub Pages
         run: |

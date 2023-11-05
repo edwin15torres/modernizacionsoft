@@ -27,10 +27,11 @@ jobs:
       - name: Instalación de librerías y dependencias
         run: |
           yarn
-          npm run test -- --code-coverage
       - name: pruebas+coverage
         id: pruebas
-        run: yarn jest --coverage
+        run: | 
+          python -m coverage run -m unittest discover tests 
+          python -m coverage xml -i 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
